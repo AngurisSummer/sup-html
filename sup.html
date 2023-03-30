@@ -2,12 +2,48 @@
 <html>
 
 <head>
-  <title>Embed Map Example</title>
+  <title>Frontier Rescue - The website</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 100%;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Turkey Earthquake</h1>
-  <iframe width="100%" height="500" src="https://your-website.com/path/to/map.html" frameborder="0"></iframe>
+  <div id="map"></div>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([37.066666, 36.15], 6); // center map at earthquake location
+
+    // add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // add circle to show affected area
+    var circle = L.circle([37.066666, 37.383331], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.35,
+      radius: 200000 // radius of the affected area in meters
+    }).addTo(map);
+
+    // add marker at earthquake location
+    var marker = L.marker([37.066666, 37.383331]).addTo(map);
+  </script>
 </body>
 
 </html>
